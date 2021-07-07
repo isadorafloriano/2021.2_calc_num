@@ -1,0 +1,32 @@
+a=0; b=1; n=20; p=0; h=(b-a)/n
+def Ah(x,s):
+    if x == 1:
+        return (2+h**2*s)
+    else:
+        if x==2:
+            y = 2+h**2*s-((-1-h/2*p)*(-1+h/2*p)/(2+h**2*s))
+        else:
+            y = 2+h**2*s-((-1-h/2*p)*(-1+h/2*p)/(Ah(x-1,s)))
+        return y
+def Diag(w):
+    x1 = Ah(1,w)
+    t=x1
+    for i in range(2,n):
+        t = t*Ah(i,w)
+    return t
+    
+q0 = -10; q1 = -9.9; n_max = 100; prec=1e-8; i=1
+q = q0; q_next = q1
+
+while(Diag(q_next-prec)*Diag(q_next+prec)> 0 & i < n_max):
+    print("Para q = {}: Diag = {}".format(q,Diag(q)))
+    print("Para q_next = {}: Diag = {}".format(q_next,Diag(q_next)))
+    temp = q_next-Diag(q_next)*(q_next-q)/(Diag(q_next)-Diag(q)) # define a nova apromimação
+    print("Próximo q_next = {}\n".format(temp))
+    q = q_next
+    q_next = temp
+    i=i+1
+    
+print("Última iteração: {}, onde:".format(i))
+print("q = {}: Diag = {}".format(q,Diag(q)))
+print("\033[1m q_next = q* = {}\033[0m: Diag = {}".format(q_next,Diag(q_next)))
