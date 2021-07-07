@@ -12,7 +12,7 @@ for q in range (-10,1):
     print("Para q = {}\n".format(q))
     Diag = Ah(1)
     print("Ah1 = {}".format(Ah(1)))
-    for i in range(2,n+1):
+    for i in range(2,n):
         print("Ah{} = {}".format(i, Ah(i)))
         Diag = Diag*Ah(i)
     print("\n \033[1m Diag({}) = {} \033[0m\n".format(q, Diag))
